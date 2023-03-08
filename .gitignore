@@ -3,3 +3,4 @@
 .terraform.tfstate.lock.info
 license.rli
 terraform.tfstate*
+*.pem

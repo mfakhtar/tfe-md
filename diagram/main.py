@@ -17,6 +17,4 @@ with Diagram("AWS Infrastructure", show=False):
                     eip = EC2ElasticIpAddress("EIP")
                     ec2 = EC2("TFE")
             # Create the Route53 record
-            record = Route53("fawaz-tfe")
-    usr >> record >> eip >> ec2
-    usr >> record >> eip >> ec2
+    usr >> eip >> ec2

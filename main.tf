@@ -38,7 +38,7 @@ resource "aws_instance" "guide-tfe-md" {
     connection {
       type        = "ssh"
       user        = "ubuntu"
-      private_key = "${file("./key.pem")}"
+      private_key = file("./key.pem")
       host        = self.public_dns
     }
   }

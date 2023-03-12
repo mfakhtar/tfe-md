@@ -16,12 +16,6 @@ resource "local_file" "foo" {
   file_permission = "0400"
 }
 
-output "private_key_pem" {
-  description = "The private key (save this in a .pem file) for ssh to instances"
-  value       = tls_private_key.ssh_key.private_key_pem
-  sensitive   = true
-}
-
 output "ssh_public_ip" {
   description = "Command for ssh to the Client public IP of the EC2 Instance"
   value = [

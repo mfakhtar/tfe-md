@@ -30,7 +30,7 @@ resource "aws_instance" "guide-tfe-md" {
     tfe-pwd              = var.tfe-pwd
     tfe_release_sequence = var.tfe_release_sequence
   })
-
+  /*
   provisioner "file" {
     source      = "./license.rli"
     destination = "/tmp/license.rli"
@@ -42,6 +42,7 @@ resource "aws_instance" "guide-tfe-md" {
       host        = self.public_dns
     }
   }
+  */
   tags = {
     Name = var.hostname
   }
@@ -50,4 +51,23 @@ resource "aws_instance" "guide-tfe-md" {
   ]
 
 }
+
+resource "null_resource" "ssh_connection" {
+  provisioner "file" {
+    source      = "./license.rli"
+    destination = "/tmp/license.rli"
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = file("${aws_key_pair.ssh_key_pair.key_name}.pem")
+      host        = aws_eip.bar.public_dns
+    }
+  }
+
+  depends_on = [
+    aws_eip.bar
+  ]
+}
+
 
